@@ -1,5 +1,4 @@
 import Input from "./Input.jsx";
-import Items from "./Items.jsx";
 import Item from "./Item.jsx";
 import { useEffect, useState } from "react";
 
@@ -9,12 +8,19 @@ export default function Container() {
     error: null,
     data: undefined,
   });
+  const [newItem, setNewItem] = useState({
+    item: undefined,
+    done: false,
+  });
 
   let content;
 
   if (APIState.loading) content = <p>Loading...</p>;
   else if (APIState.error) content = <p>Une erreur est survenue</p>;
-  else if (APIState.data?.length > 0)
+  /*else if (Array.isArray(APIState.data))
+    /!*content = <Item item={APIState.data} />;*!/ console.log("Test");*/ else if (
+    APIState.data?.length > 0
+  )
     content = (
       <ul>
         {APIState.data.map((el, i) => {
@@ -26,29 +32,66 @@ export default function Container() {
 
   useEffect(() => {
     setAPIState({ ...APIState, loading: true });
+
+    // GET
     async function fetchData() {
       try {
-        const response = await fetch("/data/dataArray.json");
+        const response = await fetch("https://restapi.fr/api/courses");
+
+        if (!response.ok) {
+          throw new Error("HTTP error, status = " + response.status);
+        }
+        const data = await response.json();
+        setAPIState({
+          loading: false,
+          error: null,
+          data: Array.isArray(data) ? data : [data],
+        });
+        console.log(APIState);
+      } catch (error) {
+        setAPIState({ loading: false, error: true, data: undefined });
+        console.log("erreur", error);
+      }
+    }
+
+    // POST
+    async function sendData() {
+      try {
+        const response = await fetch("https://restapi.fr/api/courses", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newItem),
+        });
 
         if (!response.ok) {
           throw new Error("HTTP error, status = " + response.status);
         }
         const data = await response.json();
         setAPIState({ loading: false, error: null, data: data });
+        console.log("send done");
+        fetchData();
       } catch (error) {
         setAPIState({ loading: false, error: true, data: undefined });
         console.log("erreur", error);
       }
     }
-    fetchData();
-  }, []);
+
+    if (newItem.item) {
+      sendData();
+    } else {
+      fetchData();
+    }
+  }, [newItem]);
 
   return (
     <div className={"bg-amber-100 p-28 shadow-lg"}>
       <h1>Mes Courses</h1>
-      <Input />
-      <Items />
-      {content}
+      <Input newItem={newItem} setNewItem={setNewItem} />
+      <ul>{content}</ul>
     </div>
   );
 }
+
+/*"/data/dataArray.json"*/

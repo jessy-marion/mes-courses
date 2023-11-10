@@ -7,5 +7,9 @@
   {
     "item": "pommes",
     "done": false
+  },
+  {
+    "item": "poires",
+    "done": false
   }
 ]
