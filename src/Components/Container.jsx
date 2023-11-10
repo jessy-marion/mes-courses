@@ -31,10 +31,11 @@ export default function Container() {
     );
 
   useEffect(() => {
-    setAPIState({ ...APIState, loading: true });
+    /*setAPIState({ ...APIState, loading: true });*/
 
     // GET
     async function fetchData() {
+      setAPIState({ ...APIState, loading: true });
       try {
         const response = await fetch("https://restapi.fr/api/courses");
 
@@ -47,7 +48,6 @@ export default function Container() {
           error: null,
           data: Array.isArray(data) ? data : [data],
         });
-        console.log(APIState);
       } catch (error) {
         setAPIState({ loading: false, error: true, data: undefined });
         console.log("erreur", error);
@@ -68,12 +68,18 @@ export default function Container() {
         if (!response.ok) {
           throw new Error("HTTP error, status = " + response.status);
         }
-        const data = await response.json();
-        setAPIState({ loading: false, error: null, data: data });
-        console.log("send done");
-        fetchData();
+        const addItem = await response.json();
+        console.log(addItem);
+
+        setAPIState((APIState) => ({
+          ...APIState,
+          data: [...APIState.data, addItem],
+        }));
+
+        /*fetchData();*/
       } catch (error) {
         setAPIState({ loading: false, error: true, data: undefined });
+
         console.log("erreur", error);
       }
     }

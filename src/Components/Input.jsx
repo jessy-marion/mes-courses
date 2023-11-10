@@ -6,7 +6,6 @@ export default function Input({ newItem, setNewItem }) {
   useEffect(() => {}, [newItem]);
   function handleChange(e) {
     setInput(e.target.value);
-    console.log(input);
   }
 
   function handleSubmit(e) {
