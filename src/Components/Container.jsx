@@ -17,22 +17,23 @@ export default function Container() {
 
   if (APIState.loading) content = <p>Loading...</p>;
   else if (APIState.error) content = <p>Une erreur est survenue</p>;
-  /*else if (Array.isArray(APIState.data))
-    /!*content = <Item item={APIState.data} />;*!/ console.log("Test");*/ else if (
-    APIState.data?.length > 0
-  )
+  else if (APIState.data?.length > 0)
     content = (
       <ul>
         {APIState.data.map((el, i) => {
-          return <Item key={`${i}-${el.item}`} item={el} />; //
-          /*return <li key={el.i}>{el.item}</li>;*/
+          return (
+            <Item
+              key={`${i}-${el.item}`}
+              item={el}
+              APIState={APIState}
+              setAPIState={setAPIState}
+            />
+          ); //
         })}
       </ul>
     );
 
   useEffect(() => {
-    /*setAPIState({ ...APIState, loading: true });*/
-
     // GET
     async function fetchData() {
       setAPIState({ ...APIState, loading: true });
@@ -48,6 +49,7 @@ export default function Container() {
           error: null,
           data: Array.isArray(data) ? data : [data],
         });
+        console.log(data);
       } catch (error) {
         setAPIState({ loading: false, error: true, data: undefined });
         console.log("erreur", error);
@@ -75,8 +77,6 @@ export default function Container() {
           ...APIState,
           data: [...APIState.data, addItem],
         }));
-
-        /*fetchData();*/
       } catch (error) {
         setAPIState({ loading: false, error: true, data: undefined });
 
@@ -94,10 +94,10 @@ export default function Container() {
   return (
     <div className={"bg-amber-100 p-28 shadow-lg"}>
       <h1>Mes Courses</h1>
-      <Input newItem={newItem} setNewItem={setNewItem} />
       <ul>{content}</ul>
+      <Input setNewItem={setNewItem} />
     </div>
   );
 }
 
-/*"/data/dataArray.json"*/
+//TODO : Oui, il est généralement judicieux et recommandé de séparer la logique de communication avec l'API de vos composants React.
