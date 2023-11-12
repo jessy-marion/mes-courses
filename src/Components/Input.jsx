@@ -1,6 +1,6 @@
 import Submit from "./Submit.jsx";
-import { useState } from "react";
 import { Tooltip } from "react-tooltip";
+import { useEffect, useState } from "react";
 
 export default function Input({
   setNewItem,
@@ -12,7 +12,9 @@ export default function Input({
 }) {
   const [input, setInput] = useState("");
 
-  const toolTip = "Ajouter un article";
+  useEffect(() => {
+    if (modif) setInput(item.item);
+  }, [item, modif]);
 
   async function patchData() {
     try {
@@ -48,7 +50,6 @@ export default function Input({
   function handleSubmit(e) {
     e.preventDefault();
     if (modif) {
-      console.log("On y est");
       patchData();
       setModif(false);
     } else setNewItem({ item: input, done: false });
@@ -58,9 +59,9 @@ export default function Input({
   return (
     <form onSubmit={handleSubmit} action="submit">
       <input
-        /*value={input}*/
+        value={input}
         data-tooltip-id={"toolTip"}
-        data-tooltip-content={"Ajouter un article"}
+        data-tooltip-content={"Ajoutez un article"}
         data-tooltip-place={"bottom"}
         onChange={(e) => handleChange(e)}
         className={

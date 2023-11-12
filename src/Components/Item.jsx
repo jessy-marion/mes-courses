@@ -7,24 +7,23 @@ import { Tooltip } from "react-tooltip";
 export default function Item({ item, APIState, setAPIState }) {
   const [dbclick, setDbclick] = useState(false);
 
+  const selectedItem = item.item;
+  console.log(selectedItem);
   function handleClick(e) {
     switch (e.detail) {
       case 1:
-        console.log("simple click");
         break;
       case 2:
-        console.log("double click");
-        console.log(item._id);
         setDbclick(!dbclick);
         break;
       default:
-        console.log("click");
         break;
     }
   }
 
   return dbclick ? (
     <Input
+      value={selectedItem}
       modif={dbclick}
       setModif={setDbclick}
       item={item}
