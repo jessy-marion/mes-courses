@@ -92,8 +92,10 @@ export default function Container() {
   }, [newItem]);
 
   return (
-    <div className={"bg-amber-100 p-28 shadow-lg"}>
-      <h1>Mes Courses</h1>
+    <div
+      className={`bg-amber-100 min-h-[400px] p-32 shadow-lg rounded-r-3xl paper`}
+    >
+      <h1 className={"mb-[15px]"}>Mes Courses</h1>
       <ul>{content}</ul>
       <Input setNewItem={setNewItem} />
     </div>
