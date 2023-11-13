@@ -1,11 +1,13 @@
 import "./App.css";
-import Container from "./Components/Container.jsx";
+import Paper from "./Components/Paper.jsx";
+import Window from "./Components/Window.jsx";
 
 function App() {
   return (
-    <>
-      <Container />
-    </>
+    <div className={"flex justify-center items-center flex-col"}>
+      <Window />
+      <Paper />
+    </div>
   );
 }
 

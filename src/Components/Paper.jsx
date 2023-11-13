@@ -2,7 +2,7 @@ import Input from "./Input.jsx";
 import Item from "./Item.jsx";
 import { useEffect, useState } from "react";
 
-export default function Container() {
+export default function Paper() {
   const [APIState, setAPIState] = useState({
     loading: false,
     error: null,
@@ -93,7 +93,7 @@ export default function Container() {
 
   return (
     <div
-      className={`bg-amber-100 min-h-[400px] p-32 shadow-lg rounded-r-3xl paper`}
+      className={`bg-amber-100 min-h-[400px] max-w-xl p-32 shadow-lg rounded-r-3xl paper `}
     >
       <h1 className={"mb-[15px]"}>Mes Courses</h1>
       <ul>{content}</ul>
