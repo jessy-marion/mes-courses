@@ -4,7 +4,7 @@ import Window from "./Components/Window.jsx";
 
 function App() {
   return (
-    <div className={"flex justify-center items-center flex-col"}>
+    <div className={"flex p-3 lg:p-40 justify-center items-center flex-col"}>
       <Window />
       <Paper />
     </div>

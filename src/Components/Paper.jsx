@@ -93,7 +93,7 @@ export default function Paper() {
 
   return (
     <div
-      className={`bg-amber-100 sm:w-full md:max-w-xl p-32 shadow-lg rounded-r-3xl paper `}
+      className={`bg-amber-100 sm:w-full p-8 md:max-w-xl md:p-32 shadow-lg rounded-r-3xl paper `}
     >
       <h1 className={"mb-[15px]"}>Mes Courses</h1>
       <ul>{content}</ul>
