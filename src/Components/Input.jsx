@@ -61,7 +61,7 @@ export default function Input({
       <input
         value={input}
         data-tooltip-id={"toolTip"}
-        data-tooltip-content={"Ajoutez un article"}
+        data-tooltip-content={"Ajouter un article"}
         data-tooltip-place={"bottom"}
         onChange={(e) => handleChange(e)}
         className={

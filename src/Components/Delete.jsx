@@ -39,5 +39,3 @@ export default function Delete({ item, APIState, setAPIState }) {
     </div>
   );
 }
-
-//TODO: Probleme actualiser supprime des données

@@ -34,7 +34,7 @@ export default function Item({ item, APIState, setAPIState }) {
     <li onClick={handleClick}>
       <span
         data-tooltip-id="tooltip"
-        data-tooltip-content="Double cliquez pour modifier"
+        data-tooltip-content="Double cliquer pour modifier"
         data-tooltip-place={"left"}
         className={`${
           item.done ? "line-through" : ""
