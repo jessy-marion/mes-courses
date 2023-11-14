@@ -17,8 +17,8 @@ export default function Window() {
       }`}
     >
       <h2>
-        🛒 Bienvenue sur l'app Mes Courses ! Ici vous pouvez faire une liste de
-        courses persistente afin ne de rien oublier.
+        🛒 Bienvenue sur l'app Mes Courses ! Ici vous pourrez faire une liste de
+        courses persistante afin ne de rien oublier.
       </h2>
     </div>
   );
