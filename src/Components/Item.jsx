@@ -8,7 +8,7 @@ export default function Item({ item, APIState, setAPIState }) {
   const [dbclick, setDbclick] = useState(false);
 
   const selectedItem = item.item;
-  console.log(selectedItem);
+
   function handleClick(e) {
     switch (e.detail) {
       case 1:
