@@ -42,6 +42,7 @@ export default function Input({
           "mt-1 outline-none border-b-2 bg  border-black bg-transparent text-2xl w-44 "
         }
         type="text"
+        required
       />
       <Tooltip id="toolTip" />
       <Submit modif={modif} />
